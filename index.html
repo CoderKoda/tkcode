@@ -4,69 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Koda — developer, builder, and creator.">
-  <title>Koda — Developer</title>
+  <title>koda.dev — developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="bg-grid"></div>
-  <header class="nav">
-    <a class="logo" href="#">TK<span>.</span></a>
-    <nav>
-      <a href="#work">Work</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+  <div class="noise"></div>
+  <div class="grid"></div>
+
+  <header class="nav shell">
+    <a class="brand" href="#top"><span>~/</span>koda</a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#work">./work</a>
+      <a href="#about">./about</a>
+      <a href="#stack">./stack</a>
+      <a href="#contact">./contact</a>
     </nav>
-    <a class="status" href="#contact"><i></i> Available</a>
+    <div class="nav-meta"><span class="dot"></span> online</div>
   </header>
 
-  <main>
+  <main id="top" class="shell">
     <section class="hero">
-      <p class="eyebrow">// developer & creator</p>
-      <h1>Building things<br><em>worth using.</em></h1>
-      <p class="intro">I’m Koda — a developer who likes turning ambitious ideas into fast, polished software.</p>
-      <div class="hero-actions">
-        <a class="button primary" href="#work">See my work <span>↗</span></a>
-        <a class="button ghost" href="#contact">Get in touch</a>
+      <div class="hero-copy">
+        <p class="prompt"><span class="green">koda@dev</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span> whoami</p>
+        <h1>Hi, I'm <span>Koda.</span><br>I build things<br>with <span>code.</span><b class="cursor">_</b></h1>
+        <p class="lead">Developer, tinkerer, and professional “let's see if this works” enthusiast. I like turning weird ideas into software that actually exists.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#work">$ ls ./projects <span>↗</span></a>
+          <a class="btn secondary" href="#contact">$ contact_me</a>
+        </div>
       </div>
-      <div class="scroll">SCROLL <span>↓</span></div>
+
+      <div class="terminal" aria-label="Terminal preview">
+        <div class="terminal-bar">
+          <div class="traffic"><i></i><i></i><i></i></div>
+          <span>koda — zsh</span>
+          <span class="terminal-time">tty1</span>
+        </div>
+        <div class="terminal-body">
+          <p><span class="green">koda@dev</span>:<span class="blue">~</span>$ neofetch</p>
+          <div class="terminal-grid">
+            <pre class="ascii">   __  __
+  / / / /__  ____ _
+ / /_/ / _ \/ __ `/
+/ __  /  __/ /_/ /
+/_/ /_/\___/\__,_/ </pre>
+            <div class="stats">
+              <p><b>OS</b> macOS / Unix brain</p>
+              <p><b>EDITOR</b> VS Code</p>
+              <p><b>LANGS</b> Python · JS · HTML · CSS</p>
+              <p><b>STATUS</b> <span class="green">building...</span></p>
+              <p><b>COFFEE</b> required</p>
+            </div>
+          </div>
+          <p class="terminal-line"><span class="green">koda@dev</span>:<span class="blue">~</span>$ <span id="typed">git status</span><span class="cursor-small">▌</span></p>
+          <p class="terminal-output" id="terminal-output">Everything up to date. Probably.</p>
+        </div>
+      </div>
     </section>
 
     <section id="work" class="section">
-      <div class="section-head"><span>01</span><h2>Selected work</h2></div>
+      <div class="section-label"><span>01</span><span>./projects</span><span class="line"></span></div>
+      <div class="section-intro"><h2>Things I've <em>built.</em></h2><p>A small collection of experiments, tools, and projects. More in the works.</p></div>
       <div class="projects">
-        <article class="project featured">
-          <div class="project-top"><span class="tag">01 / PROJECT</span><span class="arrow">↗</span></div>
-          <h3>TkCode</h3>
-          <p>A developer-focused project exploring tools, code, and ideas built from scratch.</p>
-          <div class="chips"><span>Python</span><span>JavaScript</span><span>Web</span></div>
-        </article>
-        <article class="project">
-          <div class="project-top"><span class="tag">02 / PROJECT</span><span class="arrow">↗</span></div>
-          <h3>Coming soon</h3>
-          <p>Something new is being built. Check back soon.</p>
-          <div class="chips"><span>BUILDING</span></div>
-        </article>
+        <a class="project large" href="https://github.com/CoderKoda/tkcode" target="_blank" rel="noreferrer">
+          <div class="project-head"><span>$ ./open tkcode</span><span>↗</span></div>
+          <div class="project-main"><p class="project-number">01</p><h3>tkcode</h3><p>A place for experiments, ideas, and whatever I'm building next.</p></div>
+          <div class="project-foot"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub</span></div>
+        </a>
+        <div class="project placeholder">
+          <div class="project-head"><span>$ ./open next_project</span><span>...</span></div>
+          <div class="project-main"><p class="project-number">02</p><h3>Next project</h3><p>File currently compiling. Come back soon.</p></div>
+          <div class="project-foot"><span>STATUS: WIP</span></div>
+        </div>
       </div>
     </section>
 
     <section id="about" class="section about">
-      <div class="section-head"><span>02</span><h2>About</h2></div>
+      <div class="section-label"><span>02</span><span>./about</span><span class="line"></span></div>
       <div class="about-grid">
-        <p class="big-copy">Curious by default.<br>Obsessed with making<br><em>cool things.</em></p>
-        <div class="about-copy"><p>I enjoy programming, experimenting with new technology, and building projects that start as “what if?” and end up as something real.</p><p>Currently exploring the intersection of software, design, and AI.</p></div>
+        <div><h2>Curious by default.<br><em>Builder by choice.</em></h2></div>
+        <div class="about-copy">
+          <p>I enjoy taking an idea, opening my editor, and figuring out how to make the thing real. Sometimes that means a useful tool. Sometimes it means making a programming language because I wondered, “why not?”</p>
+          <p>I'm especially interested in Python, web development, automation, AI, and learning how systems work under the hood.</p>
+          <p class="command"><span class="green">koda@dev</span>:<span class="blue">~</span>$ cat /etc/motd<br><span class="dim">make it work · make it clean · make it yours</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="section stack">
+      <div class="section-label"><span>03</span><span>./stack</span><span class="line"></span></div>
+      <div class="stack-grid">
+        <div><span class="stack-title">languages</span><p>Python<br>JavaScript<br>HTML / CSS</p></div>
+        <div><span class="stack-title">tools</span><p>Git / GitHub<br>VS Code<br>Terminal / CLI</p></div>
+        <div><span class="stack-title">currently learning</span><p>AI / ML<br>Systems<br>Better UI design</p></div>
       </div>
     </section>
 
     <section id="contact" class="section contact">
-      <p class="eyebrow">// say hello</p>
-      <h2>Have an idea?<br><em>Let’s build it.</em></h2>
-      <a class="email" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
+      <p class="prompt"><span class="green">koda@dev</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span> ./say_hello</p>
+      <h2>Let's build<br><em>something.</em></h2>
+      <a class="contact-link" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
     </section>
   </main>
 
-  <footer><span>© 2026 TK</span><span>Built with HTML & CSS</span></footer>
+  <footer class="shell footer"><span>~/koda © 2026</span><span>exit 0</span></footer>
+  <script src="script.js"></script>
 </body>
 </html>
