@@ -1,36 +1,17 @@
-const lines = [
-  ["git status", "On branch main — working tree clean."],
-  ["python main.py", "Hello, world. Let's build something."],
-  ["npm run dev", "Local server started on :3000."],
-  ["echo $STATUS", "building..."],
-];
+const desktop=document.getElementById('desktop');const boot=document.getElementById('boot');const start=document.getElementById('start-button');const menu=document.getElementById('start-menu');const tasks=document.getElementById('task-buttons');const toast=document.getElementById('toast');const input=document.getElementById('terminal-input');const log=document.getElementById('terminal-log');const clock=document.getElementById('clock');let z=20;const windows={};
 
-const typed = document.getElementById("typed");
-const output = document.getElementById("terminal-output");
+document.addEventListener('DOMContentLoaded',()=>{setTimeout(()=>{boot.classList.add('hidden');desktop.classList.remove('hidden')},1150);setClock();setInterval(setClock,1000);document.querySelectorAll('[data-app]').forEach(el=>el.addEventListener('click',()=>openApp(el.dataset.app)));document.querySelectorAll('[data-action="close"]').forEach(b=>b.addEventListener('click',e=>closeWindow(e.target.closest('.window'))));document.querySelectorAll('[data-action="min"]').forEach(b=>b.addEventListener('click',e=>minWindow(e.target.closest('.window'))));document.querySelectorAll('.window').forEach(setupWindow);start.addEventListener('click',e=>{e.stopPropagation();menu.classList.toggle('open')});document.addEventListener('click',e=>{if(!menu.contains(e.target)&&e.target!==start)menu.classList.remove('open')});if(input){input.addEventListener('keydown',handleTerminal);input.addEventListener('click',()=>focusTerminal())}document.querySelectorAll('.project-file').forEach(x=>x.addEventListener('click',()=>projectMessage(x.dataset.open)));});
 
-let index = 0;
-let timer;
-
-function cycleTerminal() {
-  const [command, result] = lines[index];
-  typed.textContent = "";
-  output.textContent = "";
-  let i = 0;
-
-  clearInterval(timer);
-  timer = setInterval(() => {
-    typed.textContent = command.slice(0, i++);
-    if (i > command.length) {
-      clearInterval(timer);
-      setTimeout(() => {
-        output.textContent = result;
-        index = (index + 1) % lines.length;
-        setTimeout(cycleTerminal, 2600);
-      }, 350);
-    }
-  }, 55);
-}
-
-window.addEventListener("load", () => {
-  setTimeout(cycleTerminal, 600);
-});
+function setClock(){if(clock)clock.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}
+function setupWindow(win){win.addEventListener('mousedown',()=>focusWindow(win));const title=win.querySelector('.window-title');if(!title)return;let drag=false,sx=0,sy=0,ox=0,oy=0;title.addEventListener('mousedown',e=>{if(e.target.closest('button'))return;drag=true;sx=e.clientX;sy=e.clientY;ox=win.offsetLeft;oy=win.offsetTop;focusWindow(win);e.preventDefault()});window.addEventListener('mousemove',e=>{if(!drag||window.innerWidth<761)return;win.style.left=Math.max(0,ox+e.clientX-sx)+'px';win.style.top=Math.max(0,oy+e.clientY-sy)+'px'});window.addEventListener('mouseup',()=>drag=false)}
+function openApp(app){const win=document.querySelector(`[data-app-window="${app}"]`);if(!win)return;if(!windows[app]){windows[app]={open:true,min:false};positionWindow(win,app);createTask(app)}else if(windows[app].min){windows[app].min=false;win.classList.add('open')}else win.classList.add('open');focusWindow(win);menu.classList.remove('open');if(app==='terminal')setTimeout(focusTerminal,50)}
+function positionWindow(win,app){const positions={about:[Math.max(150,innerWidth*.23),Math.max(55,innerHeight*.15)],projects:[Math.max(115,innerWidth*.12),Math.max(95,innerHeight*.2)],terminal:[Math.max(170,innerWidth*.28),Math.max(70,innerHeight*.2)],contact:[Math.max(90,innerWidth*.48),Math.max(120,innerHeight*.28)],readme:[Math.max(130,innerWidth*.36),Math.max(100,innerHeight*.28)],browser:[Math.max(120,innerWidth*.2),Math.max(80,innerHeight*.14)]};const p=positions[app]||[150,100];win.style.left=Math.min(p[0],Math.max(10,innerWidth-win.offsetWidth-15))+'px';win.style.top=Math.min(p[1],Math.max(10,innerHeight-win.offsetHeight-65))+'px';win.classList.add('open')}
+function focusWindow(win){if(!win)return;win.style.zIndex=++z;document.querySelectorAll('.task-button').forEach(x=>x.classList.remove('active'));const t=document.querySelector(`.task-button[data-task="${win.dataset.appWindow}"]`);if(t)t.classList.add('active')}
+function createTask(app){const title=document.querySelector(`[data-app-window="${app}"] .window-title span`)?.textContent.trim()||app;const b=document.createElement('button');b.className='task-button active';b.dataset.task=app;b.textContent=title;b.addEventListener('click',()=>{const win=document.querySelector(`[data-app-window="${app}"]`);if(windows[app]?.min){windows[app].min=false;win.classList.add('open');focusWindow(win)}else if(parseInt(win.style.zIndex||0)===z)minWindow(win);else focusWindow(win)});tasks.appendChild(b)}
+function closeWindow(win){if(!win)return;win.classList.remove('open');const app=win.dataset.appWindow;windows[app]={open:false,min:false};document.querySelector(`.task-button[data-task="${app}"]`)?.remove();toastMsg(`${app} closed`)}
+function minWindow(win){if(!win)return;const app=win.dataset.appWindow;win.classList.remove('open');windows[app]={open:true,min:true};document.querySelector(`.task-button[data-task="${app}"]`)?.classList.remove('active')}
+function toastMsg(text){toast.textContent=text;toast.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(()=>toast.classList.remove('show'),1700)}
+function focusTerminal(){openApp('terminal');input?.focus()}
+function print(text){const line=document.createElement('div');line.textContent=text;log.appendChild(line);log.scrollTop=log.scrollHeight}
+function handleTerminal(e){if(e.key!=='Enter')return;const value=input.value.trim();input.value='';if(!value)return;print(`koda@kodaos:~$ ${value}`);const [cmd,...args]=value.split(/\s+/);const rest=args.join(' ');const commands={help:()=>print('Available commands: help, about, projects, contact, github, clear, date, whoami, neofetch, ls, open <app>'),about:()=>{print('Koda — developer, tinkerer, and builder.');openApp('about')},projects:()=>openApp('projects'),contact:()=>openApp('contact'),github:()=>window.open('https://github.com/CoderKoda','_blank','noopener'),date:()=>print(new Date().toString()),whoami:()=>print('koda\nsoftware / experiments / questionable ideas'),neofetch:()=>print('KodaOS\nHost: browser\nShell: koda-shell\nLangs: Python, JavaScript, HTML, CSS\nStatus: building'),ls:()=>print('About Me/\nProjects/\nTerminal/\nContact/\nREADME.txt\nWeb/') ,clear:()=>{log.innerHTML=''}};if(cmd==='open'){openApp(rest||'readme')}else if(commands[cmd])commands[cmd]();else print(`command not found: ${cmd}`)}
+function projectMessage(name){const data={tkcode:'tkcode — this portfolio itself.',caveman:'Caveman — an experimental programming language project.',chicken:'Chicken — another language experiment.',ai:'AI Lab — self-hosted AI experiments.'};toastMsg(data[name]||`${name}: project info unavailable`)}
