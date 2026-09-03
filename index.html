@@ -1,116 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Koda — developer, builder, and creator.">
-  <title>koda.dev — developer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0b3c65">
+  <meta name="description" content="Koda's interactive developer portfolio desktop.">
+  <title>KodaOS — Developer Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="noise"></div>
-  <div class="grid"></div>
-
-  <header class="nav shell">
-    <a class="brand" href="#top"><span>~/</span>koda</a>
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#work">./work</a>
-      <a href="#about">./about</a>
-      <a href="#stack">./stack</a>
-      <a href="#contact">./contact</a>
-    </nav>
-    <div class="nav-meta"><span class="dot"></span> online</div>
-  </header>
-
-  <main id="top" class="shell">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="prompt"><span class="green">koda@dev</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span> whoami</p>
-        <h1>Hi, I'm <span>Koda.</span><br>I build things<br>with <span>code.</span><b class="cursor">_</b></h1>
-        <p class="lead">Developer, tinkerer, and professional “let's see if this works” enthusiast. I like turning weird ideas into software that actually exists.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#work">$ ls ./projects <span>↗</span></a>
-          <a class="btn secondary" href="#contact">$ contact_me</a>
-        </div>
-      </div>
-
-      <div class="terminal" aria-label="Terminal preview">
-        <div class="terminal-bar">
-          <div class="traffic"><i></i><i></i><i></i></div>
-          <span>koda — zsh</span>
-          <span class="terminal-time">tty1</span>
-        </div>
-        <div class="terminal-body">
-          <p><span class="green">koda@dev</span>:<span class="blue">~</span>$ neofetch</p>
-          <div class="terminal-grid">
-            <pre class="ascii">   __  __
-  / / / /__  ____ _
- / /_/ / _ \/ __ `/
-/ __  /  __/ /_/ /
-/_/ /_/\___/\__,_/ </pre>
-            <div class="stats">
-              <p><b>OS</b> macOS / Unix brain</p>
-              <p><b>EDITOR</b> VS Code</p>
-              <p><b>LANGS</b> Python · JS · HTML · CSS</p>
-              <p><b>STATUS</b> <span class="green">building...</span></p>
-              <p><b>COFFEE</b> required</p>
-            </div>
-          </div>
-          <p class="terminal-line"><span class="green">koda@dev</span>:<span class="blue">~</span>$ <span id="typed">git status</span><span class="cursor-small">▌</span></p>
-          <p class="terminal-output" id="terminal-output">Everything up to date. Probably.</p>
-        </div>
-      </div>
+  <div id="boot" class="boot-screen"><div class="boot-logo">KODA<span>OS</span></div><div class="boot-line">Starting personal desktop...</div><div class="boot-progress"><i></i></div></div>
+  <main id="desktop" class="desktop hidden">
+    <div class="wallpaper-shape shape-a"></div><div class="wallpaper-shape shape-b"></div>
+    <section class="desktop-icons" aria-label="Desktop">
+      <button class="desktop-icon" data-app="about"><span class="icon person">♟</span><b>About Me</b></button><button class="desktop-icon" data-app="projects"><span class="icon folder">▰</span><b>Projects</b></button><button class="desktop-icon" data-app="terminal"><span class="icon terminal-icon">›_</span><b>Terminal</b></button><button class="desktop-icon" data-app="contact"><span class="icon mail">✉</span><b>Contact</b></button><button class="desktop-icon" data-app="readme"><span class="icon file">▤</span><b>README.txt</b></button><button class="desktop-icon" data-app="browser"><span class="icon browser-icon">◎</span><b>Web</b></button>
     </section>
 
-    <section id="work" class="section">
-      <div class="section-label"><span>01</span><span>./projects</span><span class="line"></span></div>
-      <div class="section-intro"><h2>Things I've <em>built.</em></h2><p>A small collection of experiments, tools, and projects. More in the works.</p></div>
-      <div class="projects">
-        <a class="project large" href="https://github.com/CoderKoda/tkcode" target="_blank" rel="noreferrer">
-          <div class="project-head"><span>$ ./open tkcode</span><span>↗</span></div>
-          <div class="project-main"><p class="project-number">01</p><h3>tkcode</h3><p>A place for experiments, ideas, and whatever I'm building next.</p></div>
-          <div class="project-foot"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>GitHub</span></div>
-        </a>
-        <div class="project placeholder">
-          <div class="project-head"><span>$ ./open next_project</span><span>...</span></div>
-          <div class="project-main"><p class="project-number">02</p><h3>Next project</h3><p>File currently compiling. Come back soon.</p></div>
-          <div class="project-foot"><span>STATUS: WIP</span></div>
-        </div>
-      </div>
-    </section>
+    <section id="window-about" class="window" data-app-window="about"><header class="window-title"><span><i class="tiny-icon person"></i> About Me</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="window-body about-window"><div class="profile-mark">K</div><div><p class="muted mono">C:\Users\Koda\about.txt</p><h1>Hi, I'm Koda.</h1><p>I like building software, experimenting with ideas, and learning how things work by actually making them.</p><p>This site is intentionally a desktop environment — open apps, move windows around, and poke at things.</p><div class="chips"><span>Python</span><span>JavaScript</span><span>HTML/CSS</span><span>AI</span></div></div></div></section>
 
-    <section id="about" class="section about">
-      <div class="section-label"><span>02</span><span>./about</span><span class="line"></span></div>
-      <div class="about-grid">
-        <div><h2>Curious by default.<br><em>Builder by choice.</em></h2></div>
-        <div class="about-copy">
-          <p>I enjoy taking an idea, opening my editor, and figuring out how to make the thing real. Sometimes that means a useful tool. Sometimes it means making a programming language because I wondered, “why not?”</p>
-          <p>I'm especially interested in Python, web development, automation, AI, and learning how systems work under the hood.</p>
-          <p class="command"><span class="green">koda@dev</span>:<span class="blue">~</span>$ cat /etc/motd<br><span class="dim">make it work · make it clean · make it yours</span></p>
-        </div>
-      </div>
-    </section>
+    <section id="window-projects" class="window" data-app-window="projects"><header class="window-title"><span><i class="tiny-icon folder"></i> Projects</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="window-body file-window"><div class="pathbar"><span>📁</span> C:\Users\Koda\Projects</div><div class="project-files"><button class="project-file" data-open="tkcode"><span>⌘</span><strong>tkcode</strong><small>Interactive portfolio</small></button><button class="project-file" data-open="caveman"><span>🐗</span><strong>Caveman</strong><small>Programming language</small></button><button class="project-file" data-open="chicken"><span>🍗</span><strong>Chicken</strong><small>Language experiment</small></button><button class="project-file" data-open="ai"><span>◈</span><strong>AI Lab</strong><small>Self-hosted AI experiments</small></button></div></div></section>
 
-    <section id="stack" class="section stack">
-      <div class="section-label"><span>03</span><span>./stack</span><span class="line"></span></div>
-      <div class="stack-grid">
-        <div><span class="stack-title">languages</span><p>Python<br>JavaScript<br>HTML / CSS</p></div>
-        <div><span class="stack-title">tools</span><p>Git / GitHub<br>VS Code<br>Terminal / CLI</p></div>
-        <div><span class="stack-title">currently learning</span><p>AI / ML<br>Systems<br>Better UI design</p></div>
-      </div>
-    </section>
+    <section id="window-terminal" class="window terminal-window" data-app-window="terminal"><header class="window-title dark-title"><span><i class="tiny-icon terminal-icon"></i> Terminal</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="terminal-body"><div><span class="prompt-user">koda@kodaos</span>:<span class="prompt-path">~</span>$ <span class="terminal-intro">help</span></div><div id="terminal-log" class="terminal-log"></div><div class="terminal-input-row"><span class="prompt-user">koda@kodaos</span>:<span class="prompt-path">~</span>$ <input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal input"></div></div></section>
 
-    <section id="contact" class="section contact">
-      <p class="prompt"><span class="green">koda@dev</span><span class="dim">:</span><span class="blue">~</span><span class="dim">$</span> ./say_hello</p>
-      <h2>Let's build<br><em>something.</em></h2>
-      <a class="contact-link" href="mailto:hello@example.com">hello@example.com <span>↗</span></a>
-    </section>
+    <section id="window-contact" class="window small-window" data-app-window="contact"><header class="window-title"><span><i class="tiny-icon mail"></i> Contact</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="window-body contact-window"><p class="mono muted">C:\Users\Koda\contact.txt</p><h2>Let's build something.</h2><p>Send me a message and tell me what you're working on.</p><a class="contact-button" href="mailto:hello@example.com">✉ hello@example.com</a><a class="plain-link" href="https://github.com/CoderKoda" target="_blank" rel="noreferrer">↗ github.com/CoderKoda</a></div></section>
+
+    <section id="window-readme" class="window small-window" data-app-window="readme"><header class="window-title"><span><i class="tiny-icon file"></i> README.txt</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="window-body text-window"><p>Welcome to KodaOS.</p><p>This isn't a normal portfolio.</p><p>Try opening the apps, moving windows, or opening the terminal.</p><p class="muted">Tip: type <code>help</code> in Terminal.</p></div></section>
+
+    <section id="window-browser" class="window browser-window" data-app-window="browser"><header class="window-title"><span><i class="tiny-icon browser-icon"></i> Web Browser</span><div class="window-buttons"><button data-action="min">—</button><button data-action="close">×</button></div></header><div class="browser-toolbar"><button>←</button><button>→</button><div class="address">https://github.com/CoderKoda</div></div><div class="window-body browser-content"><div class="browser-mark">◎</div><h2>Koda on GitHub</h2><p>Open-source projects, experiments, and a lot of commits.</p><a href="https://github.com/CoderKoda" target="_blank" rel="noreferrer">Open GitHub ↗</a></div></section>
+
+    <aside id="toast" class="toast"></aside>
+    <footer class="taskbar"><button id="start-button" class="start-button"><span class="windows-logo">⊞</span><strong>Start</strong></button><div id="task-buttons" class="task-buttons"></div><div class="system-tray"><span id="clock">12:00</span><span>⌁</span><span>▴</span></div></footer>
+    <div id="start-menu" class="start-menu"><div class="start-profile"><div>K</div><strong>Koda</strong></div><button data-app="about">♟ <span>About Me</span></button><button data-app="projects">▰ <span>Projects</span></button><button data-app="terminal">›_ <span>Terminal</span></button><button data-app="contact">✉ <span>Contact</span></button><button data-app="browser">◎ <span>GitHub</span></button><div class="start-footer"><span>KodaOS</span><span>2026</span></div></div>
   </main>
-
-  <footer class="shell footer"><span>~/koda © 2026</span><span>exit 0</span></footer>
   <script src="script.js"></script>
 </body>
 </html>
